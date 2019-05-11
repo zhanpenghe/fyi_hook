@@ -2,6 +2,7 @@ import os
 import shutil
 
 from git import Repo
+from django.http import HttpResponse
 
 
 def update_github_io(local_path, git_url, create=True):
@@ -26,3 +27,13 @@ def update_github_io(local_path, git_url, create=True):
     print('Cloning repository({}) to {}.'.format(git_url, local_path))
     Repo.clone_from(git_url, local_path)
     print('Done')
+
+
+def default(request):
+    path = os.path.join('.', 'test_dir')
+    url = 'https://github.com/rlworkgroup/dowel.git'
+    try:
+        update_github_io(path, url)
+        return HttpResponse('Updated local!')
+    except Exception:
+        return HttpResponse('Failed to update local!')

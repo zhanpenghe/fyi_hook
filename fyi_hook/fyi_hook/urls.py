@@ -17,9 +17,9 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url
 
-from githubio import views as githubio_views 
+from .githubio import default 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'^githubio/$', githubio_views.default, name='default')
+    url(r'^githubio/$', default, name='default')
 ]
